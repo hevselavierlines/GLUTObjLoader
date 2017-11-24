@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:GlutExample.xcodeproj">
+      location = "self:/Users/Afaci/Documents/FHBachelor/iOS/jonas/GlutA2/GlutA2.xcodeproj">
    </FileRef>
 </Workspace>

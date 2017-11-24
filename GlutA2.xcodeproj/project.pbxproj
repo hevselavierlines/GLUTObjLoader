@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21C81CB61FA0A75B00EED05B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C81CB51FA0A75B00EED05B /* main.cpp */; };
+		2100B2321FC7846A0007985B /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2100B2301FC7846A0007985B /* Model.cpp */; };
+		21C81CC21FA0A78400EED05B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C81CBF1FA0A78400EED05B /* main.cpp */; };
+		21FD1A861FA0B0DF001BFC1A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FD1A851FA0B0DF001BFC1A /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		21C81CB21FA0A75B00EED05B /* GlutExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GlutExample; sourceTree = BUILT_PRODUCTS_DIR; };
-		21C81CB51FA0A75B00EED05B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2100B2301FC7846A0007985B /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		2100B2311FC7846A0007985B /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
+		2100B2341FC78F210007985B /* box.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = box.obj; path = ../../../../../box.obj; sourceTree = "<group>"; };
+		2100B2351FC798A00007985B /* cone.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cone.obj; sourceTree = "<group>"; };
+		2100B2361FC79C420007985B /* helix.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helix.obj; sourceTree = "<group>"; };
+		2100B2371FC79D5B0007985B /* sword.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sword.obj; sourceTree = "<group>"; };
+		214B23E91FC5AB780088CC70 /* bighouse.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bighouse.txt; sourceTree = "<group>"; };
+		214B23EA1FC5ABF90088CC70 /* bighouse.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bighouse.txt; sourceTree = "<group>"; };
+		21C81CB21FA0A75B00EED05B /* GlutA2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GlutA2; sourceTree = BUILT_PRODUCTS_DIR; };
+		21C81CBF1FA0A78400EED05B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		21C81CC01FA0A78400EED05B /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		21FD1A851FA0B0DF001BFC1A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21FD1A861FA0B0DF001BFC1A /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,7 +54,9 @@
 		21C81CA91FA0A75B00EED05B = {
 			isa = PBXGroup;
 			children = (
-				21C81CB41FA0A75B00EED05B /* GlutExample */,
+				214B23EA1FC5ABF90088CC70 /* bighouse.txt */,
+				21FD1A851FA0B0DF001BFC1A /* OpenGL.framework */,
+				21C81CB41FA0A75B00EED05B /* GlutA2 */,
 				21C81CB31FA0A75B00EED05B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +64,34 @@
 		21C81CB31FA0A75B00EED05B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21C81CB21FA0A75B00EED05B /* GlutExample */,
+				21C81CB21FA0A75B00EED05B /* GlutA2 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		21C81CB41FA0A75B00EED05B /* GlutExample */ = {
+		21C81CB41FA0A75B00EED05B /* GlutA2 */ = {
 			isa = PBXGroup;
 			children = (
-				21C81CB51FA0A75B00EED05B /* main.cpp */,
+				2100B2371FC79D5B0007985B /* sword.obj */,
+				2100B2361FC79C420007985B /* helix.obj */,
+				2100B2351FC798A00007985B /* cone.obj */,
+				2100B2341FC78F210007985B /* box.obj */,
+				214B23E91FC5AB780088CC70 /* bighouse.txt */,
+				21C81CBF1FA0A78400EED05B /* main.cpp */,
+				21C81CC01FA0A78400EED05B /* readme.txt */,
+				2100B2301FC7846A0007985B /* Model.cpp */,
+				2100B2311FC7846A0007985B /* Model.hpp */,
 			);
+			name = GlutA2;
 			path = GlutExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21C81CB11FA0A75B00EED05B /* GlutExample */ = {
+		21C81CB11FA0A75B00EED05B /* GlutA2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21C81CB91FA0A75B00EED05B /* Build configuration list for PBXNativeTarget "GlutExample" */;
+			buildConfigurationList = 21C81CB91FA0A75B00EED05B /* Build configuration list for PBXNativeTarget "GlutA2" */;
 			buildPhases = (
 				21C81CAE1FA0A75B00EED05B /* Sources */,
 				21C81CAF1FA0A75B00EED05B /* Frameworks */,
@@ -77,9 +101,9 @@
 			);
 			dependencies = (
 			);
-			name = GlutExample;
+			name = GlutA2;
 			productName = GlutExample;
-			productReference = 21C81CB21FA0A75B00EED05B /* GlutExample */;
+			productReference = 21C81CB21FA0A75B00EED05B /* GlutA2 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +120,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 21C81CAD1FA0A75B00EED05B /* Build configuration list for PBXProject "GlutExample" */;
+			buildConfigurationList = 21C81CAD1FA0A75B00EED05B /* Build configuration list for PBXProject "GlutA2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -108,7 +132,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21C81CB11FA0A75B00EED05B /* GlutExample */,
+				21C81CB11FA0A75B00EED05B /* GlutA2 */,
 			);
 		};
 /* End PBXProject section */
@@ -118,7 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C81CB61FA0A75B00EED05B /* main.cpp in Sources */,
+				21C81CC21FA0A78400EED05B /* main.cpp in Sources */,
+				2100B2321FC7846A0007985B /* Model.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,21 +234,39 @@
 		21C81CBA1FA0A75B00EED05B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				HEADER_SEARCH_PATHS = (
+					"\"/opt/X11/include\"",
+					"\"/usr/local/include\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"/opt/X11/lib\"",
+					"\"/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = "-lGLUT";
+				PRODUCT_NAME = GlutA2;
 			};
 			name = Debug;
 		};
 		21C81CBB1FA0A75B00EED05B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				HEADER_SEARCH_PATHS = (
+					"\"/opt/X11/include\"",
+					"\"/usr/local/include\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"/opt/X11/lib\"",
+					"\"/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = "-lGLUT";
+				PRODUCT_NAME = GlutA2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21C81CAD1FA0A75B00EED05B /* Build configuration list for PBXProject "GlutExample" */ = {
+		21C81CAD1FA0A75B00EED05B /* Build configuration list for PBXProject "GlutA2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21C81CB71FA0A75B00EED05B /* Debug */,
@@ -232,13 +275,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21C81CB91FA0A75B00EED05B /* Build configuration list for PBXNativeTarget "GlutExample" */ = {
+		21C81CB91FA0A75B00EED05B /* Build configuration list for PBXNativeTarget "GlutA2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21C81CBA1FA0A75B00EED05B /* Debug */,
 				21C81CBB1FA0A75B00EED05B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

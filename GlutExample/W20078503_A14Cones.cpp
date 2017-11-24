@@ -4,14 +4,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <math.h>
-#include <iostream>
-#include <fstream>
 #define GL_GLEXT_PROTOTYPES
 #include <GLUT/glut.h>
 #define GL_PI 3.1415
-#include "Model.hpp"
-
-using namespace std;
 
 // ----------------------------------------------------------
 // Function Prototypes
@@ -25,16 +20,63 @@ void viewportTopRight();
 void viewportBottomLeft();
 void viewportBottomRight();
 
-Model model1, model2, model3, model4;
 
+// ----------------------------------------------------------
+// Cone class that saves all the variabels and contains a
+// draw method.
+// ----------------------------------------------------------
+class Cone {
+public:
+    float x, y, z;
+    float rotX, rotY, rotZ;
+    float radius;
+    int mode;
+    
+    Cone() : x(0.0f), y(0.0f), z(50.0f), rotX(0.0f), rotY(0.0f), rotZ(0.0f), radius(20.0f), mode(0) {}
+    
+    void draw() {
+        if(mode == 0) {
+            glPolygonMode(GL_FRONT,GL_LINE);
+            glPolygonMode(GL_BACK, GL_LINE);
+        }
+        glPushMatrix();
+        glRotatef(rotX, 1.0f, 0.0f, 0.0f);
+        glRotatef(rotY, 0.0f, 1.0f, 0.0f);
+        glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
+        
+        glBegin(GL_TRIANGLE_FAN);
+        int step = 0, accurancy = 16;
+        
+        glVertex3f(x, y, z);
+        float angle;
+        for(int i = 0; i <= accurancy; i++)
+        {
+            angle = ((float)i / accurancy) * (2.0f * GL_PI);
+            glColor3f(step % 2 == 0, step % 2, 0.0f);
+            step++;
+            x = radius*sin(angle);
+            y = radius*cos(angle);
+            
+            glVertex2f(x, y);
+        }
+        glEnd();
+        glPopMatrix();
+        if(mode == 0) {
+            glPolygonMode(GL_FRONT,GL_FILL);
+            glPolygonMode(GL_BACK, GL_FILL);
+        }
+    }
+};
+
+Cone cone1, cone2, cone3, cone4;
 
 // --------------------------------------------------------------
 // update(int value) is the function that is called by the timer
 // --------------------------------------------------------------
 void update(int value) {
-    model1.rotX += 1.0f;
-    model2.rotY += 1.0f;
-    model3.rotZ += 1.0f;
+    cone1.rotX += 1.0f;
+    cone2.rotY += 1.0f;
+    cone3.rotZ += 1.0f;
     
     glutPostRedisplay();
     glutTimerFunc(33, update, 1);
@@ -88,57 +130,32 @@ void render(){
     glutSwapBuffers();
 }
 
-void loadAndDraw(char * fileName)
-{
-    fstream inStream;
-    inStream.open(fileName, ios::in);
-    if (inStream.fail())
-        return;
-    GLint numpolys, numLines;
-    inStream >> numpolys;
-    for (int j = 0; j < numpolys; j++)
-    {
-        inStream >> numLines;
-        glBegin( GL_LINE_STRIP);
-        for (int i = 0; i < numLines; i++)
-        {
-            float x, y;
-            inStream >> x >> y;
-            glVertex2f(x, y);
-        }
-        glEnd();
-    }
-    inStream.close();
-}
-
 // ----------------------------------------------------------
 // viewportTopLeft() draws the top - left viewport
 // ----------------------------------------------------------
 void viewportTopLeft() {
-    //cone1.draw();
-    model1.draw();
-    //loadAndDraw("/Users/Afaci/Documents/FHBachelor/iOS/jonas/GlutA2/bighouse.txt");
+    cone1.draw();
 }
 
 // ----------------------------------------------------------
 // viewportTopRight() draws the top - right viewport
 // ----------------------------------------------------------
 void viewportTopRight() {
-    model2.draw();
+    cone2.draw();
 }
 
 // ----------------------------------------------------------
 // viewportBottomLeft() draws the bottom - left viewport
 // ----------------------------------------------------------
 void viewportBottomLeft() {
-    model3.draw();
+    cone3.draw();
 }
 
 // ----------------------------------------------------------
 // viewportBottomRight() draws the bottom - right viewport
 // ----------------------------------------------------------
 void viewportBottomRight() {
-    model4.draw();
+    cone4.draw();
 }
 
 void specialKeys(int key, int x, int y) {
@@ -152,9 +169,9 @@ void specialKeys(int key, int x, int y) {
     zRot = (key == GLUT_KEY_PAGE_UP) ? -1 : zRot;
     zRot = (key == GLUT_KEY_PAGE_DOWN) ? 1 : zRot;
     
-    model4.rotX += xRot;
-    model4.rotY += yRot;
-    model4.rotZ += zRot;
+    cone4.rotX += xRot;
+    cone4.rotY += yRot;
+    cone4.rotZ += zRot;
     
     glutPostRedisplay();
 }
@@ -169,7 +186,7 @@ void setupRC(void)
     glPolygonMode(GL_BACK, GL_FILL);
     glShadeModel(GL_FLAT);
     
-    model4.mode = 1;
+    cone4.mode = 1;
 }
 
 // ----------------------------------------------------------
@@ -183,7 +200,7 @@ int main(int argc, char* argv[]){
     //  Request double buffered true color window with Z-buffer
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     // Create window
-    glutCreateWindow("OBJLoader");
+    glutCreateWindow("4Cones");
     
     //  Enable Z-buffer depth test
     //glEnable(GL_DEPTH_TEST);
@@ -193,15 +210,9 @@ int main(int argc, char* argv[]){
     glutSpecialFunc(specialKeys);
     glutTimerFunc(33, update, 1);
     
-    model1.load("/Users/Afaci/Documents/sword.obj");
-    model2 = model1;
-    model3 = model1;
-    model4 = model1;
     setupRC();
     //  Pass control to GLUT for events
     glutMainLoop();
-    
-    
     
     //  Return to OS
     return 0;
