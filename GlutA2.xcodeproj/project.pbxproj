@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2100B2321FC7846A0007985B /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2100B2301FC7846A0007985B /* Model.cpp */; };
+		2133C7A21FCED3AF00FC6307 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2133C7A01FCED3AF00FC6307 /* Camera.cpp */; };
 		21C81CC21FA0A78400EED05B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C81CBF1FA0A78400EED05B /* main.cpp */; };
 		21FD1A861FA0B0DF001BFC1A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FD1A851FA0B0DF001BFC1A /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -31,12 +32,14 @@
 		2100B2351FC798A00007985B /* cone.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cone.obj; sourceTree = "<group>"; };
 		2100B2361FC79C420007985B /* helix.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helix.obj; sourceTree = "<group>"; };
 		2100B2371FC79D5B0007985B /* sword.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sword.obj; sourceTree = "<group>"; };
+		2133C79F1FCED24A00FC6307 /* smartpointer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = smartpointer.hpp; sourceTree = "<group>"; };
+		2133C7A01FCED3AF00FC6307 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		2133C7A11FCED3AF00FC6307 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		214B23E91FC5AB780088CC70 /* bighouse.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bighouse.txt; sourceTree = "<group>"; };
 		214B23EA1FC5ABF90088CC70 /* bighouse.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bighouse.txt; sourceTree = "<group>"; };
 		21528A5C1FC7A21400C5EE8A /* schirmschussobjloader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = schirmschussobjloader.png; sourceTree = "<group>"; };
 		21C81CB21FA0A75B00EED05B /* GlutA2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GlutA2; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C81CBF1FA0A78400EED05B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		21C81CC01FA0A78400EED05B /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		21FD1A851FA0B0DF001BFC1A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -80,9 +83,11 @@
 				2100B2341FC78F210007985B /* box.obj */,
 				214B23E91FC5AB780088CC70 /* bighouse.txt */,
 				21C81CBF1FA0A78400EED05B /* main.cpp */,
-				21C81CC01FA0A78400EED05B /* readme.txt */,
 				2100B2301FC7846A0007985B /* Model.cpp */,
 				2100B2311FC7846A0007985B /* Model.hpp */,
+				2133C79F1FCED24A00FC6307 /* smartpointer.hpp */,
+				2133C7A01FCED3AF00FC6307 /* Camera.cpp */,
+				2133C7A11FCED3AF00FC6307 /* Camera.hpp */,
 			);
 			name = GlutA2;
 			path = GlutExample;
@@ -145,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21C81CC21FA0A78400EED05B /* main.cpp in Sources */,
+				2133C7A21FCED3AF00FC6307 /* Camera.cpp in Sources */,
 				2100B2321FC7846A0007985B /* Model.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

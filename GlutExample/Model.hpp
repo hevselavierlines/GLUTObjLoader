@@ -14,25 +14,30 @@
 #include <fstream>
 #include <GLUT/glut.h>
 
+#include "smartpointer.hpp"
+
 using namespace std;
 
 class Vector3f {
 public:
-    typedef std::unique_ptr<Vector3f> Ref;
+    typedef ofPtr<Vector3f> Ref;
     float x, y, z;
+    
+    Vector3f():x(0), y(0), z(0) {};
+    Vector3f(float _x, float _y, float _z) : x(_x), y(_y), z(_z){}
 };
 
 class Index3i {
 public:
-    typedef std::unique_ptr<Index3i> Ref;
+    typedef ofPtr<Index3i> Ref;
     int i1, i2, i3;
 };
 
 class Model {
 public:
-    typedef std::unique_ptr<Model> Ref;
-    vector<Vector3f> vertices;
-    vector<Index3i> faces;
+    typedef ofPtr<Model> Ref;
+    vector<Vector3f::Ref> vertices;
+    vector<Index3i::Ref> faces;
     float rotX, rotY, rotZ;
     float scaleX, scaleY, scaleZ;
     float minX, minY, minZ, maxX, maxY, maxZ;
@@ -40,6 +45,7 @@ public:
     
     Model() : scaleX(1.0f), scaleY(1.0f), scaleZ(1.0f), mode(0) {};
     
+    void copy(Model::Ref copy);
     void draw();
     void load(string fileName);
     vector<string> split(string line, char split);

@@ -16,43 +16,44 @@ void Model::load(string fileName) {
         return;
     std::string str;
     while(std::getline(inStream, str)){
-        {
-            vector<string> splits = split(str, ' ');
-            if(splits.size() >= 3) {
-                string type = splits[0];
-                if(type.compare("v") == 0) {
-                    Vector3f vertex;
-                    vertex.x = std::stof(splits[1]);
-                    vertex.y = std::stof(splits[2]);
-                    vertex.z = std::stof(splits[3]);
-                    if(vertex.x < minX) {
-                        minX = vertex.x;
-                    }
-                    if(vertex.y < minY) {
-                        minY = vertex.y;
-                    }
-                    if(vertex.z < minZ) {
-                        minZ = vertex.z;
-                    }
-                    if(vertex.x > maxX) {
-                        maxX = vertex.x;
-                    }
-                    if(vertex.y > maxY) {
-                        maxY = vertex.y;
-                    }
-                    if(vertex.z > maxZ) {
-                        maxZ = vertex.z;
-                    }
-                    vertices.push_back(vertex);
-                } else if(type.compare("f") == 0) {
-                    Index3i index;
-                    index.i1 = std::stoi(split(splits[1], '/')[0]) - 1;
-                    index.i2 = std::stoi(split(splits[2], '/')[0]) - 1;
-                    index.i3 = std::stoi(split(splits[3], '/')[0]) - 1;
-                    faces.push_back(index);
+        vector<string> splits = split(str, ' ');
+        if(splits.size() >= 3) {
+            string type = splits[0];
+            if(type.compare("v") == 0) {
+                Vector3f::Ref vertex = Vector3f::Ref(new Vector3f());
+                vertex->x = std::stof(splits[1]);
+                vertex->y = std::stof(splits[2]);
+                vertex->z = std::stof(splits[3]);
+                if(vertex->x < minX) {
+                    minX = vertex->x;
                 }
+                if(vertex->y < minY) {
+                    minY = vertex->y;
+                }
+                if(vertex->z < minZ) {
+                    minZ = vertex->z;
+                }
+                if(vertex->x > maxX) {
+                    maxX = vertex->x;
+                }
+                if(vertex->y > maxY) {
+                    maxY = vertex->y;
+                }
+                if(vertex->z > maxZ) {
+                    maxZ = vertex->z;
+                }
+                
+                vertices.push_back(vertex);
+                
+            } else if(type.compare("f") == 0) {
+                Index3i::Ref index = Index3i::Ref(new Index3i());
+                index->i1 = std::stoi(split(splits[1], '/')[0]) - 1;
+                index->i2 = std::stoi(split(splits[2], '/')[0]) - 1;
+                index->i3 = std::stoi(split(splits[3], '/')[0]) - 1;
+                faces.push_back(index);
             }
         }
+        
     }
     inStream.close();
     scaleX = (float)100 / (abs(minX) + abs(maxX)) / 2;
@@ -91,6 +92,23 @@ vector<string> Model::split(string line, char split) {
     return elems;
 }
 
+void Model::copy(Model::Ref copy) {
+    vertices = copy->vertices;
+    faces = copy->faces;
+    minX = copy->minX;
+    minY = copy->minY;
+    minZ = copy->minZ;
+    maxX = copy->maxX;
+    maxY = copy->maxY;
+    maxZ = copy->maxZ;
+    rotX = copy->rotX;
+    rotY = copy->rotY;
+    rotZ = copy->rotZ;
+    scaleX = copy->scaleX;
+    scaleY = copy->scaleY;
+    scaleZ = copy->scaleZ;
+}
+
 void Model::draw() {
     glPushMatrix();
     glScalef(scaleX, scaleY, scaleZ);
@@ -101,19 +119,20 @@ void Model::draw() {
         glPolygonMode(GL_FRONT,GL_LINE);
         glPolygonMode(GL_BACK, GL_LINE);
     }
+    glBegin(GL_TRIANGLES);
     for(int i = 0; i < faces.size(); i++) {
-        Index3i index = faces[i];
-        glBegin(GL_TRIANGLES);
-        Vector3f elem1 = vertices[index.i1];
-        glVertex3f(elem1.x, elem1.y, elem1.z);
+        Index3i::Ref index = faces[i];
         
-        Vector3f elem2 = vertices[index.i2];
-        glVertex3f(elem2.x, elem2.y, elem2.z);
+        Vector3f::Ref elem1 = vertices[index->i1];
+        glVertex3f(elem1->x, elem1->y, elem1->z);
         
-        Vector3f elem3 = vertices[index.i3];
-        glVertex3f(elem3.x, elem3.y, elem3.z);
-        glEnd();
+        Vector3f::Ref elem2 = vertices[index->i2];
+        glVertex3f(elem2->x, elem2->y, elem2->z);
+        
+        Vector3f::Ref elem3 = vertices[index->i3];
+        glVertex3f(elem3->x, elem3->y, elem3->z);
     }
+    glEnd();
     if(mode == 0) {
         glPolygonMode(GL_FRONT,GL_FILL);
         glPolygonMode(GL_BACK, GL_FILL);

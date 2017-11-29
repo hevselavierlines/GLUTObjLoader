@@ -10,6 +10,7 @@
 #include <GLUT/glut.h>
 #define GL_PI 3.1415
 #include "Model.hpp"
+#include "Camera.hpp"
 
 using namespace std;
 
@@ -19,15 +20,16 @@ using namespace std;
 void render();
 void update(int value);
 void specialKeys();
+void keyboardKeys(unsigned char key, int num1, int num2);
 
 void viewportTopLeft();
 void viewportTopRight();
 void viewportBottomLeft();
 void viewportBottomRight();
 
+int active = 4;
 Model model1, model2, model3, model4;
-
-
+Camera camera1, camera2, camera3, camera4;
 // --------------------------------------------------------------
 // update(int value) is the function that is called by the timer
 // --------------------------------------------------------------
@@ -44,7 +46,6 @@ void update(int value) {
 // render() main drawing function
 // ----------------------------------------------------------
 void render(){
-    
     //  Clear screen and Z-buffer
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     
@@ -115,30 +116,92 @@ void loadAndDraw(char * fileName)
 // viewportTopLeft() draws the top - left viewport
 // ----------------------------------------------------------
 void viewportTopLeft() {
-    //cone1.draw();
-    model1.draw();
-    //loadAndDraw("/Users/Afaci/Documents/FHBachelor/iOS/jonas/GlutA2/bighouse.txt");
+    if(active == 1) {
+        glColor3f(1.0f, 0.0f, 0.0f);
+    } else {
+        glColor3f(0.0f, 1.0f, 0.0f);
+    }
+    camera1.render(&model1);
 }
 
 // ----------------------------------------------------------
 // viewportTopRight() draws the top - right viewport
 // ----------------------------------------------------------
 void viewportTopRight() {
-    model2.draw();
+    if(active == 2) {
+        glColor3f(1.0f, 0.0f, 0.0f);
+    } else {
+        glColor3f(0.0f, 1.0f, 0.0f);
+    }
+    camera2.render(&model2);
 }
 
 // ----------------------------------------------------------
 // viewportBottomLeft() draws the bottom - left viewport
 // ----------------------------------------------------------
 void viewportBottomLeft() {
-    model3.draw();
+    if(active == 3) {
+        glColor3f(1.0f, 0.0f, 0.0f);
+    } else {
+        glColor3f(0.0f, 1.0f, 0.0f);
+    }
+    camera3.render(&model3);
 }
 
 // ----------------------------------------------------------
 // viewportBottomRight() draws the bottom - right viewport
 // ----------------------------------------------------------
 void viewportBottomRight() {
-    model4.draw();
+    if(active == 4) {
+        glColor3f(1.0f, 0.0f, 0.0f);
+    } else {
+        glColor3f(0.0f, 1.0f, 0.0f);
+    }
+    camera4.render(&model4);
+}
+
+void keyboardKeys(unsigned char key, int num1, int num2) {
+    Camera* activeCam = nullptr;
+    switch(active) {
+        case 1:
+            activeCam = &camera1;
+            break;
+        case 2:
+            activeCam = &camera2;
+            break;
+        case 3:
+            activeCam = &camera3;
+            break;
+        default:
+            activeCam = &camera4;
+    }
+    if(key == 'w') {
+        activeCam->position.z += 1.0f;
+    } else if(key == 's') {
+        activeCam->position.z -= 1.0f;
+    } else if(key == 'a') {
+        activeCam->position.x -= 1.0f;
+    } else if(key == 'd') {
+        activeCam->position.x += 1.0f;
+    } else if(key == 'e') {
+        activeCam->position.y += 1.0f;
+    } else if(key == 'q') {
+        activeCam->position.y -= 1.0f;
+    } else if(key == '\t') {
+        active += 1;
+        if(active > 4) {
+            active = 1;
+        }
+    } else if(key == '1') {
+        active = 1;
+    } else if(key == '2') {
+        active = 2;
+    } else if(key == '3') {
+        active = 3;
+    } else if(key == '4') {
+        active = 4;
+    }
+    glutPostRedisplay();
 }
 
 void specialKeys(int key, int x, int y) {
@@ -163,7 +226,10 @@ void setupRC(void)
 {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glColor3f(0.0f, 1.0f, 0.0f);
-    glOrtho(-100.0f, 100.0f, -100.0f, 100.0f, -100.0f, 100.0f);
+    
+    gluPerspective(60.0f, 1, 50.0, 400.0);
+    //glOrtho(-100.0f, 100.0f, -100.0f, 100.0f, -100.0f, 100.0f);
+    glTranslatef(0, 0, -100.0f);
     
     glPolygonMode(GL_FRONT, GL_FILL);
     glPolygonMode(GL_BACK, GL_FILL);
@@ -191,6 +257,7 @@ int main(int argc, char* argv[]){
     // Callback functions
     glutDisplayFunc(render);
     glutSpecialFunc(specialKeys);
+    glutKeyboardFunc(keyboardKeys);
     glutTimerFunc(33, update, 1);
     
     model1.load("/Users/Afaci/Documents/sword.obj");
