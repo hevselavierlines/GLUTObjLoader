@@ -30,7 +30,9 @@ public:
 class Index3i {
 public:
     typedef ofPtr<Index3i> Ref;
-    int i1, i2, i3;
+    int size;
+    int i1, i2, i3, i4;
+    vector<int> indices;
 };
 
 class Model {

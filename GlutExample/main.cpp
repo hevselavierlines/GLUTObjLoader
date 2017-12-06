@@ -252,7 +252,7 @@ int main(int argc, char* argv[]){
     glutCreateWindow("OBJLoader");
     
     //  Enable Z-buffer depth test
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     
     // Callback functions
     glutDisplayFunc(render);
@@ -260,7 +260,7 @@ int main(int argc, char* argv[]){
     glutKeyboardFunc(keyboardKeys);
     glutTimerFunc(33, update, 1);
     
-    model1.load("/Users/Afaci/Documents/sword.obj");
+    model1.load("/Users/Afaci/Documents/FHBachelor/iOS/jonas/GlutA2/GlutExample/horse.obj");
     model2 = model1;
     model3 = model1;
     model4 = model1;
